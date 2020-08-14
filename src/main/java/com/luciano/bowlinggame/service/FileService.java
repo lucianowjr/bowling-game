@@ -7,6 +7,6 @@ import com.luciano.bowlinggame.model.Roll;
 
 public interface FileService {
 
-	public Map<String, List<Roll>> readFile(String path);
+	Map<String, List<Roll>> readFile(String path);
 
 }

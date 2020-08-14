@@ -6,6 +6,6 @@ import com.luciano.bowlinggame.model.Player;
 
 public interface GameController {
 
-	public List<Player> getPlayersScores(String filePath);
+	List<Player> getPlayersScores(String filePath);
 
 }

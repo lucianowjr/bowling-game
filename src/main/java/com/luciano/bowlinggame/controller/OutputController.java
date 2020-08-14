@@ -6,6 +6,6 @@ import com.luciano.bowlinggame.model.Player;
 
 public interface OutputController {
 
-	public void printScoreBoard(List<Player> players);
+	void printScoreBoard(List<Player> players);
 
 }

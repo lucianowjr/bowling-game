@@ -8,6 +8,6 @@ import com.luciano.bowlinggame.model.Roll;
 
 public interface GameService {
 
-	public List<Player> createGame(Map<String, List<Roll>> rollsMap);
+	List<Player> createGame(Map<String, List<Roll>> rollsMap);
 
 }
