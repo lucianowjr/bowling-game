@@ -19,9 +19,9 @@ public class OutputServiceImpl implements OutputService {
 	private int score = 0;
 
 	@Override
-	public String printScoreBoard(List<Player> players) {
+	public String getScoreBoard(List<Player> players) {
 		StringBuilder scoreboard = new StringBuilder();
-		scoreboard.append(printHeader());
+		scoreboard.append(getHeader());
 
 		players.stream().forEach(player -> {
 			scoreboard.append(player.getName() + "\n");
@@ -29,27 +29,27 @@ public class OutputServiceImpl implements OutputService {
 			player.getFrames().stream().forEach(frame -> {
 				if (frame.isStrike()) {
 					if (frame.getRolls().size() == 3) {
-						scoreboard.append(printStrikeLastFrame(frame));
+						scoreboard.append(getStrikeLastFrame(frame));
 					} else {
-						scoreboard.append(printStrike(frame));
+						scoreboard.append(getStrike());
 					}
 				} else if (frame.isSpare()) {
-					scoreboard.append(printSpareFrame(frame));
+					scoreboard.append(getSpareFrame(frame));
 
 				} else {
-					scoreboard.append(printSimpleFrame(frame));
+					scoreboard.append(getSimpleFrame(frame));
 				}
 			});
-			scoreboard.append(printScore(player));
+			scoreboard.append(getScore(player));
 		});
 		return scoreboard.toString();
 	}
 
-	private String printHeader() {
+	private String getHeader() {
 		return "\n\nFrame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10\n";
 	}
 
-	private String printScore(Player player) {
+	private String getScore(Player player) {
 		StringBuilder score = new StringBuilder("\nScore");
 		player.getFrames().stream().forEach(frame -> {
 			incrementScore(frame.getScore());
@@ -59,7 +59,7 @@ public class OutputServiceImpl implements OutputService {
 		return score.append("\n").toString();
 	}
 
-	private String printStrikeLastFrame(Frame frame) {
+	private String getStrikeLastFrame(Frame frame) {
 		StringBuilder strike = new StringBuilder("\t" + STRIKE_MARK);
 
 		if (frame.getRolls().get(SECOND_ROLL).getPins() == MAX_ROLL_SCORE) {
@@ -75,16 +75,15 @@ public class OutputServiceImpl implements OutputService {
 		return strike.toString();
 	}
 
-	private String printStrike(Frame frame) {
+	private String getStrike() {
 		return "\t\t" + STRIKE_MARK;
 	}
 
-	private String printSimpleFrame(Frame frame) {
+	private String getSimpleFrame(Frame frame) {
 		return "\t" + frame.getRolls().get(FIRST_ROLL).getValue() + "\t" + frame.getRolls().get(SECOND_ROLL).getValue();
 	}
 
-	private String printSpareFrame(Frame frame) {
-
+	private String getSpareFrame(Frame frame) {
 		return "\t" + frame.getRolls().get(FIRST_ROLL).getValue() + "\t" + SPARE_MARK;
 	}
 

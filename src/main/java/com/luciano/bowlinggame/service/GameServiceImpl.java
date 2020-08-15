@@ -4,42 +4,55 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.luciano.bowlinggame.exception.InvalidGameException;
 import com.luciano.bowlinggame.model.Frame;
 import com.luciano.bowlinggame.model.Player;
 import com.luciano.bowlinggame.model.Roll;
+import com.luciano.bowlinggame.validator.GameValidator;
 
 @Service
 public class GameServiceImpl implements GameService {
+
+	@Autowired
+	private GameValidator gameValidator;
 
 	private static int MAX_FRAMES = 10;
 	private static int MAX_ROLL_SCORE = 10;
 
 	@Override
 	public List<Player> createGame(Map<String, List<Roll>> rollsMap) {
-
 		List<Player> players = new ArrayList<>();
-
-		for (String name : rollsMap.keySet()) {
-			Player player = new Player(name);
-			player.setFrames(createFrames(rollsMap.get(name)));
-			players.add(player);
+		try {
+			for (String name : rollsMap.keySet()) {
+				Player player = new Player(name);
+				player.setFrames(createFrames(rollsMap.get(name)));
+				players.add(player);
+			}
+		} catch (InvalidGameException e) {
+			System.out.println(e.getMessage());
+			System.exit(0);
 		}
 
 		return players;
 	}
 
 	private List<Frame> createFrames(List<Roll> rolls) {
+		gameValidator.validateGameRolls(rolls);
 
 		List<Frame> frames = new ArrayList<>();
 
 		int cursor = 0;
-		for (int f = 0; f < MAX_FRAMES; f++) {
+		for (int p = 0; p < MAX_FRAMES; p++) {
 			if (isStrike(rolls, cursor)) {
-				frames.add(createStrikeFrame(rolls, cursor, f));
-				cursor++;
-
+				frames.add(createStrikeFrame(rolls, cursor, p));
+				if (p == MAX_FRAMES - 1) {
+					cursor += 2;
+				} else {
+					cursor++;
+				}
 			} else if (isSpare(rolls, cursor)) {
 				frames.add(createSpareFrame(rolls, cursor));
 				cursor += 2;
@@ -47,7 +60,10 @@ public class GameServiceImpl implements GameService {
 				frames.add(createSimpleFrame(rolls, cursor));
 				cursor += 2;
 			}
+			gameValidator.validateGameLessFrames(rolls, cursor, p);
 		}
+
+		gameValidator.validateGameMoreFrames(rolls, cursor);
 
 		return frames;
 	}

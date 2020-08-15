@@ -20,7 +20,7 @@ public class OutputControllerImpl implements OutputController {
 
 	@Override
 	public void printScoreBoard(List<Player> players) {
-		String scoreboard = outputService.printScoreBoard(players);
+		String scoreboard = outputService.getScoreBoard(players);
 		outputView.print(scoreboard);
 	}
 
