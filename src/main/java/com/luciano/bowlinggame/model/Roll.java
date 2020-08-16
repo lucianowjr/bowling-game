@@ -1,14 +1,14 @@
 package com.luciano.bowlinggame.model;
 
 public class Roll {
-	private static final String FOUL_SIGN = "f";
+	private static final String FOUL_SIGN = "F";
 	private String value;
 	private int pins;
 
 	public Roll(String value) {
 		super();
 		this.value = value;
-		if (FOUL_SIGN.equals(value.toLowerCase())) {
+		if (FOUL_SIGN.equalsIgnoreCase(value)) {
 			this.pins = 0;
 		} else {
 			this.pins = Integer.parseInt(value);

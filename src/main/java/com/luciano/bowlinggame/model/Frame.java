@@ -12,7 +12,7 @@ public class Frame {
 
 	public Frame() {
 		super();
-		this.rolls = new ArrayList<Roll>();
+		this.rolls = new ArrayList<>();
 		this.isSpare = false;
 		this.isStrike = false;
 	}
