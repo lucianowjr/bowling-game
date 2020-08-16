@@ -21,7 +21,6 @@ public class InputServiceImpl implements InputService {
 	public String getInput() {
 		System.out.println("\n");
 		System.out.println("Enter the absolute path to you input file:");
-		System.out.println("\n");
 		return scanner.nextLine();
 	}
 

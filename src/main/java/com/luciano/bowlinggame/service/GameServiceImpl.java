@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,8 @@ public class GameServiceImpl implements GameService {
 	private static int MAX_FRAMES = 10;
 	private static int MAX_ROLL_SCORE = 10;
 
+	Logger logger = LoggerFactory.getLogger(GameServiceImpl.class);
+
 	public GameServiceImpl() {
 		super();
 
@@ -35,13 +39,13 @@ public class GameServiceImpl implements GameService {
 	public List<Player> createGame(Map<String, List<Roll>> rollsMap) {
 		List<Player> players = new ArrayList<>();
 		try {
-			for (String name : rollsMap.keySet()) {
-				Player player = new Player(name);
-				player.setFrames(createFrames(rollsMap.get(name)));
+			for (Map.Entry<String, List<Roll>> entry : rollsMap.entrySet()) {
+				Player player = new Player(entry.getKey());
+				player.setFrames(createFrames(entry.getValue()));
 				players.add(player);
 			}
 		} catch (InvalidGameException e) {
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 			System.exit(0);
 		}
 

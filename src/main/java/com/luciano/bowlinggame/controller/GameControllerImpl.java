@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -24,6 +26,8 @@ public class GameControllerImpl implements GameController {
 	@Autowired
 	GameService gameService;
 
+	Logger logger = LoggerFactory.getLogger(GameServiceImpl.class);
+
 	public GameControllerImpl() {
 		super();
 
@@ -43,7 +47,7 @@ public class GameControllerImpl implements GameController {
 			Map<String, List<Roll>> rollsMap = fileService.readFile(filePath);
 			players = gameService.createGame(rollsMap);
 		} catch (FileParsingException e) {
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 			System.exit(0);
 		}
 		return players;

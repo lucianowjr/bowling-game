@@ -17,13 +17,15 @@ public class OutputServiceImpl implements OutputService {
 	private static int THIRD_ROLL = 2;
 	private static int MAX_FRAME_SIZE = 3;
 	private static int MAX_ROLL_SCORE = 10;
+	private static String HEADER = "\nFrame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10\n";
+
 	private int score = 0;
 
 	@Override
 	public String getScoreBoard(List<Player> players) {
 		StringBuilder scoreboard = new StringBuilder();
 
-		scoreboard.append(getHeader());
+		scoreboard.append(HEADER);
 
 		players.stream().forEach(player -> {
 			scoreboard.append(player.getName() + "\n");
@@ -43,10 +45,6 @@ public class OutputServiceImpl implements OutputService {
 		});
 
 		return scoreboard.toString();
-	}
-
-	private String getHeader() {
-		return "\n\nFrame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10\n";
 	}
 
 	private String getSimpleFrame(Frame frame) {
@@ -84,13 +82,13 @@ public class OutputServiceImpl implements OutputService {
 	}
 
 	private String getScore(Player player) {
-		StringBuilder score = new StringBuilder("\nScore");
+		StringBuilder stringBuilder = new StringBuilder("\nScore");
 		player.getFrames().stream().forEach(frame -> {
 			incrementScore(frame.getScore());
-			score.append("\t\t" + getScore());
+			stringBuilder.append("\t\t" + getScore());
 		});
 		setScore(0);
-		return score.append("\n").toString();
+		return stringBuilder.append("\n").toString();
 	}
 
 	private void incrementScore(int score) {

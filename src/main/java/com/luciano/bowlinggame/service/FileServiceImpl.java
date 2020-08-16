@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +26,11 @@ public class FileServiceImpl implements FileService {
 	@Autowired
 	private RollValidator rollValidator;
 
-	private static String REGEX = "\t";
-	private static int PLAYER = 0;
-	private static int PIN = 1;
+	private static final String TAB = "\t";
+	private static final int PLAYER = 0;
+	private static final int PIN = 1;
+
+	Logger logger = LoggerFactory.getLogger(FileServiceImpl.class);
 
 	public FileServiceImpl() {
 		super();
@@ -43,14 +47,14 @@ public class FileServiceImpl implements FileService {
 		try (Stream<String> stream = Files.lines(Paths.get(path))) {
 
 			stream.forEach(line -> {
-				String[] row = line.split(REGEX);
-				List<Roll> rolls = mapRolls.getOrDefault(row[PLAYER], new ArrayList<Roll>());
+				String[] row = line.split(TAB);
+				List<Roll> rolls = mapRolls.getOrDefault(row[PLAYER], new ArrayList<>());
 				String value = rollValidator.validateRoll(row[PIN]);
 				rolls.add(new Roll(value));
 				mapRolls.put(row[PLAYER], rolls);
 			});
 		} catch (InvalidDataException e) {
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 			System.exit(0);
 		} catch (IOException e) {
 			throw new FileParsingException("An error occurred when reading the file. Please, check the path.");
