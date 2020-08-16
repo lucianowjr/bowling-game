@@ -73,4 +73,48 @@ class FileServiceImplTest {
 		assertTrue(rollMap.get("John").containsAll(secondPlayer));
 	}
 
+	@Test
+	void testReadFile_Perfect() {
+		List<Roll> player = new ArrayList<>();
+
+		player.add(new Roll("10"));
+		player.add(new Roll("10"));
+		player.add(new Roll("10"));
+		player.add(new Roll("10"));
+		player.add(new Roll("10"));
+		player.add(new Roll("10"));
+		player.add(new Roll("10"));
+		player.add(new Roll("10"));
+		player.add(new Roll("10"));
+		player.add(new Roll("10"));
+		player.add(new Roll("10"));
+		player.add(new Roll("10"));
+
+		Map<String, List<Roll>> rollMap = fileService.readFile(PERFECT_FILE);
+
+		assertTrue(rollMap.containsKey("Carl"));
+		assertTrue(rollMap.get("Carl").containsAll(player));
+	}
+
+	@Test
+	void testReadFile_Zero() {
+		List<Roll> player = new ArrayList<>();
+
+		player.add(new Roll("0"));
+		player.add(new Roll("0"));
+		player.add(new Roll("0"));
+		player.add(new Roll("0"));
+		player.add(new Roll("0"));
+		player.add(new Roll("0"));
+		player.add(new Roll("0"));
+		player.add(new Roll("0"));
+		player.add(new Roll("0"));
+		player.add(new Roll("0"));
+
+		Map<String, List<Roll>> rollMap = fileService.readFile(ZERO_FILE);
+
+		assertTrue(rollMap.containsKey("Hugo"));
+		assertTrue(rollMap.get("Hugo").containsAll(player));
+	}
+
 }

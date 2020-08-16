@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.luciano.bowlinggame.exception.InvalidGameException;
@@ -14,18 +14,18 @@ import com.luciano.bowlinggame.model.Roll;
 
 class GameValidatorImplTest {
 
-	private static GameValidator gameValidator;
+	private GameValidator gameValidator;
 
 	private static String LESS_FRAMES_MESSAGE = "There were less than 10 frames in a player game. Please, check the input file.";
 	private static String MORE_FRAMES_MESSAGE = "There were more than 10 frames in a player game. Please, check the input file.";
 
-	@BeforeAll
-	public static void setUp() {
+	@BeforeEach
+	public void setUp() {
 		gameValidator = new GameValidatorImpl();
 	}
 
 	@Test
-	public void testvalidateGameRolls_failRollsBelow() {
+	public void testValidateGameRolls_failRollsBelow() {
 		Exception e = Assertions.assertThrows(InvalidGameException.class, () -> {
 
 			List<Roll> rolls = new ArrayList<>();
@@ -40,7 +40,7 @@ class GameValidatorImplTest {
 	}
 
 	@Test
-	public void testvalidateGameRolls_failRollsOver() {
+	public void testValidateGameRolls_failRollsOver() {
 		Exception e = Assertions.assertThrows(InvalidGameException.class, () -> {
 
 			List<Roll> rolls = new ArrayList<>();
@@ -71,7 +71,7 @@ class GameValidatorImplTest {
 	}
 
 	@Test
-	public void testvalidateGameLessFrames_failRollsBelow() {
+	public void testValidateGameLessFrames_failRollsBelow() {
 		Exception e = Assertions.assertThrows(InvalidGameException.class, () -> {
 
 			int cursor = 25;

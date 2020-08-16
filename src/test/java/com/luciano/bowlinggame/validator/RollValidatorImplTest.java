@@ -3,7 +3,7 @@ package com.luciano.bowlinggame.validator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.luciano.bowlinggame.exception.InvalidDataException;
@@ -11,10 +11,10 @@ import com.luciano.bowlinggame.exception.InvalidValueException;
 
 class RollValidatorImplTest {
 
-	private static RollValidator rollValidator;
+	private RollValidator rollValidator;
 
-	@BeforeAll
-	public static void setUp() {
+	@BeforeEach
+	public void setUp() {
 		rollValidator = new RollValidatorImpl();
 	}
 

@@ -7,24 +7,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import com.luciano.bowlinggame.model.Frame;
 import com.luciano.bowlinggame.model.Player;
 import com.luciano.bowlinggame.model.Roll;
+import com.luciano.bowlinggame.validator.GameValidator;
 
 class GameServiceImplTest {
 
 	private static int MAX_SCORE_FRAME = 30;
 	private static int MIN_SCORE_FRAME = 0;
-	private static int STRIKE_ROLLS_FRAME = 1;
 
-	private static GameService gameService;
+	@InjectMocks
+	private GameServiceImpl gameService;
 
-	@BeforeAll
-	public static void setUp() {
-		gameService = new GameServiceImpl();
+	@Mock
+	private GameValidator gameValidator;
+
+	@BeforeEach
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
@@ -65,6 +72,18 @@ class GameServiceImplTest {
 		for (Frame frame : players.get(0).getFrames()) {
 			assertEquals(frame.getScore(), MIN_SCORE_FRAME);
 		}
+	}
+
+	@Test
+	public void testCreateZeroGameSpareLastFrame() {
+		Map<String, List<Roll>> rollsMap = new HashMap<>();
+		rollsMap.put("Carl", generateZeroRollsSpareLastFrame());
+		List<Player> players = gameService.createGame(rollsMap);
+		List<Frame> frames = players.get(0).getFrames();
+		for (int i = 0; i < 9; i++) {
+			assertEquals(frames.get(i).getScore(), MIN_SCORE_FRAME);
+		}
+		assertEquals(frames.get(9).getScore(), 12);
 	}
 
 	private List<Roll> generateSampleRolls() {
@@ -122,6 +141,22 @@ class GameServiceImplTest {
 		for (int i = 0; i < 20; i++) {
 			rolls.add(roll);
 		}
+		return rolls;
+	}
+
+	private List<Roll> generateZeroRollsSpareLastFrame() {
+		List<Roll> rolls = new ArrayList<>();
+		Roll roll = new Roll("0");
+		for (int i = 0; i < 18; i++) {
+			rolls.add(roll);
+		}
+		roll = new Roll("0");
+		rolls.add(roll);
+		roll = new Roll("10");
+		rolls.add(roll);
+		roll = new Roll("2");
+		rolls.add(roll);
+
 		return rolls;
 	}
 
