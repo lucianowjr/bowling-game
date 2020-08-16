@@ -16,6 +16,7 @@ import com.luciano.bowlinggame.exception.FileParsingException;
 import com.luciano.bowlinggame.exception.InvalidDataException;
 import com.luciano.bowlinggame.model.Roll;
 import com.luciano.bowlinggame.validator.RollValidator;
+import com.luciano.bowlinggame.validator.RollValidatorImpl;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -26,6 +27,14 @@ public class FileServiceImpl implements FileService {
 	private static String REGEX = "\t";
 	private static int PLAYER = 0;
 	private static int PIN = 1;
+
+	public FileServiceImpl() {
+		super();
+
+		if (rollValidator == null) {
+			rollValidator = new RollValidatorImpl();
+		}
+	}
 
 	public Map<String, List<Roll>> readFile(String path) {
 

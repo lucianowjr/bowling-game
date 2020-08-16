@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 
 import com.luciano.bowlinggame.model.Player;
 import com.luciano.bowlinggame.service.OutputService;
+import com.luciano.bowlinggame.service.OutputServiceImpl;
 import com.luciano.bowlinggame.view.OutputView;
 
 @Controller
@@ -18,10 +19,21 @@ public class OutputControllerImpl implements OutputController {
 	@Autowired
 	OutputView outputView;
 
+	public OutputControllerImpl() {
+		super();
+		if (outputService == null) {
+			outputService = new OutputServiceImpl();
+		}
+	}
+
 	@Override
 	public void printScoreBoard(List<Player> players) {
-		String scoreboard = outputService.getScoreBoard(players);
-		outputView.print(scoreboard);
+		outputView.print(outputService.getScoreBoard(players));
+	}
+
+	@Override
+	public String getScoreBoard(List<Player> players) {
+		return outputService.getScoreBoard(players);
 	}
 
 }

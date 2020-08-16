@@ -11,7 +11,9 @@ import com.luciano.bowlinggame.exception.FileParsingException;
 import com.luciano.bowlinggame.model.Player;
 import com.luciano.bowlinggame.model.Roll;
 import com.luciano.bowlinggame.service.FileService;
+import com.luciano.bowlinggame.service.FileServiceImpl;
 import com.luciano.bowlinggame.service.GameService;
+import com.luciano.bowlinggame.service.GameServiceImpl;
 
 @Controller
 public class GameControllerImpl implements GameController {
@@ -21,6 +23,18 @@ public class GameControllerImpl implements GameController {
 
 	@Autowired
 	GameService gameService;
+
+	public GameControllerImpl() {
+		super();
+
+		if (fileService == null) {
+			fileService = new FileServiceImpl();
+		}
+
+		if (gameService == null) {
+			gameService = new GameServiceImpl();
+		}
+	}
 
 	@Override
 	public List<Player> getPlayersScores(String filePath) {

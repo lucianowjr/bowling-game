@@ -8,4 +8,6 @@ public interface OutputController {
 
 	void printScoreBoard(List<Player> players);
 
+	String getScoreBoard(List<Player> players);
+
 }

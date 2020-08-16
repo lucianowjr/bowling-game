@@ -12,6 +12,7 @@ import com.luciano.bowlinggame.model.Frame;
 import com.luciano.bowlinggame.model.Player;
 import com.luciano.bowlinggame.model.Roll;
 import com.luciano.bowlinggame.validator.GameValidator;
+import com.luciano.bowlinggame.validator.GameValidatorImpl;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -21,6 +22,14 @@ public class GameServiceImpl implements GameService {
 
 	private static int MAX_FRAMES = 10;
 	private static int MAX_ROLL_SCORE = 10;
+
+	public GameServiceImpl() {
+		super();
+
+		if (gameValidator == null) {
+			gameValidator = new GameValidatorImpl();
+		}
+	}
 
 	@Override
 	public List<Player> createGame(Map<String, List<Roll>> rollsMap) {
@@ -54,7 +63,7 @@ public class GameServiceImpl implements GameService {
 					cursor++;
 				}
 			} else if (isSpare(rolls, cursor)) {
-				frames.add(createSpareFrame(rolls, cursor));
+				frames.add(createSpareFrame(rolls, cursor, p));
 				cursor += 2;
 			} else {
 				frames.add(createSimpleFrame(rolls, cursor));
@@ -78,8 +87,11 @@ public class GameServiceImpl implements GameService {
 		return frame;
 	}
 
-	private Frame createSpareFrame(List<Roll> rolls, int cursor) {
+	private Frame createSpareFrame(List<Roll> rolls, int cursor, int position) {
 		Frame frame = createSimpleFrame(rolls, cursor);
+		if (position == MAX_FRAMES - 1) {
+			frame.getRolls().add(rolls.get(cursor + 2));
+		}
 		frame.setScore(MAX_ROLL_SCORE + rolls.get(cursor + 2).getPins());
 		frame.setSpare(true);
 		frame.setStrike(false);
