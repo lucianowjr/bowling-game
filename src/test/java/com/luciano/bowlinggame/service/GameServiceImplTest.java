@@ -35,27 +35,27 @@ class GameServiceImplTest {
 	}
 
 	@Test
-	public void testCreateSampleGame() {
+	void testCreateSampleGame() {
 		Map<String, List<Roll>> rollsMap = new HashMap<>();
 		rollsMap.put("Jeff", generateSampleRolls());
 		List<Player> players = gameService.createGame(rollsMap);
 
 		List<Frame> frames = players.get(0).getFrames();
 
-		assertEquals(frames.get(0).getScore(), 20);
-		assertEquals(frames.get(1).getScore(), 19);
-		assertEquals(frames.get(2).getScore(), 9);
-		assertEquals(frames.get(3).getScore(), 18);
-		assertEquals(frames.get(4).getScore(), 8);
-		assertEquals(frames.get(5).getScore(), 10);
-		assertEquals(frames.get(6).getScore(), 6);
-		assertEquals(frames.get(7).getScore(), 30);
-		assertEquals(frames.get(8).getScore(), 28);
-		assertEquals(frames.get(9).getScore(), 19);
+		assertEquals(20, frames.get(0).getScore());
+		assertEquals(19, frames.get(1).getScore());
+		assertEquals(9, frames.get(2).getScore());
+		assertEquals(18, frames.get(3).getScore());
+		assertEquals(8, frames.get(4).getScore());
+		assertEquals(10, frames.get(5).getScore());
+		assertEquals(6, frames.get(6).getScore());
+		assertEquals(30, frames.get(7).getScore());
+		assertEquals(28, frames.get(8).getScore());
+		assertEquals(19, frames.get(9).getScore());
 	}
 
 	@Test
-	public void testCreatePerfectGame() {
+	void testCreatePerfectGame() {
 		Map<String, List<Roll>> rollsMap = new HashMap<>();
 		rollsMap.put("Carl", generatePerfectRolls());
 		List<Player> players = gameService.createGame(rollsMap);
@@ -65,7 +65,7 @@ class GameServiceImplTest {
 	}
 
 	@Test
-	public void testCreateZeroGame() {
+	void testCreateZeroGame() {
 		Map<String, List<Roll>> rollsMap = new HashMap<>();
 		rollsMap.put("Hugo", generateZeroRolls());
 		List<Player> players = gameService.createGame(rollsMap);
@@ -75,15 +75,15 @@ class GameServiceImplTest {
 	}
 
 	@Test
-	public void testCreateZeroGameSpareLastFrame() {
+	void testCreateZeroGameSpareLastFrame() {
 		Map<String, List<Roll>> rollsMap = new HashMap<>();
 		rollsMap.put("Carl", generateZeroRollsSpareLastFrame());
 		List<Player> players = gameService.createGame(rollsMap);
 		List<Frame> frames = players.get(0).getFrames();
 		for (int i = 0; i < 9; i++) {
-			assertEquals(frames.get(i).getScore(), MIN_SCORE_FRAME);
+			assertEquals(MIN_SCORE_FRAME, frames.get(i).getScore());
 		}
-		assertEquals(frames.get(9).getScore(), 12);
+		assertEquals(12, frames.get(9).getScore());
 	}
 
 	private List<Roll> generateSampleRolls() {

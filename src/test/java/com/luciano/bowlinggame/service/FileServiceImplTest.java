@@ -31,17 +31,9 @@ class FileServiceImplTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		Mockito.when(rollValidator.validateRoll("0")).thenReturn("0");
-		Mockito.when(rollValidator.validateRoll("1")).thenReturn("1");
-		Mockito.when(rollValidator.validateRoll("2")).thenReturn("2");
-		Mockito.when(rollValidator.validateRoll("3")).thenReturn("3");
-		Mockito.when(rollValidator.validateRoll("4")).thenReturn("4");
-		Mockito.when(rollValidator.validateRoll("5")).thenReturn("5");
-		Mockito.when(rollValidator.validateRoll("6")).thenReturn("6");
-		Mockito.when(rollValidator.validateRoll("7")).thenReturn("7");
-		Mockito.when(rollValidator.validateRoll("8")).thenReturn("8");
-		Mockito.when(rollValidator.validateRoll("9")).thenReturn("9");
-		Mockito.when(rollValidator.validateRoll("10")).thenReturn("10");
+		for (int i = 0; i <= 10; i++) {
+			Mockito.when(rollValidator.validateRoll(Integer.toString(i))).thenReturn(Integer.toString(i));
+		}
 		Mockito.when(rollValidator.validateRoll("F")).thenReturn("F");
 	}
 
@@ -77,18 +69,9 @@ class FileServiceImplTest {
 	void testReadFile_Perfect() {
 		List<Roll> player = new ArrayList<>();
 
-		player.add(new Roll("10"));
-		player.add(new Roll("10"));
-		player.add(new Roll("10"));
-		player.add(new Roll("10"));
-		player.add(new Roll("10"));
-		player.add(new Roll("10"));
-		player.add(new Roll("10"));
-		player.add(new Roll("10"));
-		player.add(new Roll("10"));
-		player.add(new Roll("10"));
-		player.add(new Roll("10"));
-		player.add(new Roll("10"));
+		for (int i = 0; i < 12; i++) {
+			player.add(new Roll("10"));
+		}
 
 		Map<String, List<Roll>> rollMap = fileService.readFile(PERFECT_FILE);
 
@@ -100,16 +83,9 @@ class FileServiceImplTest {
 	void testReadFile_Zero() {
 		List<Roll> player = new ArrayList<>();
 
-		player.add(new Roll("0"));
-		player.add(new Roll("0"));
-		player.add(new Roll("0"));
-		player.add(new Roll("0"));
-		player.add(new Roll("0"));
-		player.add(new Roll("0"));
-		player.add(new Roll("0"));
-		player.add(new Roll("0"));
-		player.add(new Roll("0"));
-		player.add(new Roll("0"));
+		for (int i = 0; i < 10; i++) {
+			player.add(new Roll("0"));
+		}
 
 		Map<String, List<Roll>> rollMap = fileService.readFile(ZERO_FILE);
 

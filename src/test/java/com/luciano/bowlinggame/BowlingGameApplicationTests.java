@@ -39,7 +39,7 @@ class BowlingGameApplicationTests {
 	}
 
 	@Test
-	public void integrationTest_SampleCase() throws IOException {
+	void integrationTest_SampleCase() throws IOException {
 
 		List<Player> players = gameController.getPlayersScores(SAMPLE_FILE);
 		String scoreboard = outputController.getScoreBoard(players);
@@ -49,7 +49,7 @@ class BowlingGameApplicationTests {
 	}
 
 	@Test
-	public void integrationTest_PerfectCase() throws IOException {
+	void integrationTest_PerfectCase() throws IOException {
 
 		List<Player> players = gameController.getPlayersScores(PERFECT_FILE);
 		String scoreboard = outputController.getScoreBoard(players);
@@ -59,7 +59,7 @@ class BowlingGameApplicationTests {
 	}
 
 	@Test
-	public void integrationTest_ZeroCase() throws IOException {
+	void integrationTest_ZeroCase() throws IOException {
 
 		List<Player> players = gameController.getPlayersScores(ZERO_FILE);
 		String scoreboard = outputController.getScoreBoard(players);

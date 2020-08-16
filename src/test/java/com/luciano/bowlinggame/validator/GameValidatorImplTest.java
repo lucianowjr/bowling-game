@@ -25,63 +25,51 @@ class GameValidatorImplTest {
 	}
 
 	@Test
-	public void testValidateGameRolls_failRollsBelow() {
+	void testValidateGameRolls_failRollsBelow() {
+		List<Roll> rolls = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			rolls.add(new Roll(Integer.toString(i)));
+		}
 		Exception e = Assertions.assertThrows(InvalidGameException.class, () -> {
-
-			List<Roll> rolls = new ArrayList<>();
-			for (int i = 0; i < 10; i++) {
-				Roll roll = new Roll(Integer.toString(i));
-				rolls.add(roll);
-			}
-
 			gameValidator.validateGameRolls(rolls);
 		});
 		assertEquals(LESS_FRAMES_MESSAGE, e.getMessage());
 	}
 
 	@Test
-	public void testValidateGameRolls_failRollsOver() {
+	void testValidateGameRolls_failRollsOver() {
+		List<Roll> rolls = new ArrayList<>();
+		for (int i = 0; i < 25; i++) {
+			rolls.add(new Roll(Integer.toString(i)));
+		}
 		Exception e = Assertions.assertThrows(InvalidGameException.class, () -> {
-
-			List<Roll> rolls = new ArrayList<>();
-			for (int i = 0; i < 25; i++) {
-				Roll roll = new Roll(Integer.toString(i));
-				rolls.add(roll);
-			}
-
 			gameValidator.validateGameRolls(rolls);
 		});
 		assertEquals(MORE_FRAMES_MESSAGE, e.getMessage());
 	}
 
 	@Test
-	public void testValidateGameMoreFrames_failRollsOver() {
+	void testValidateGameMoreFrames_failRollsOver() {
+		int cursor = 23;
+		List<Roll> rolls = new ArrayList<>();
+		for (int i = 0; i < 25; i++) {
+			rolls.add(new Roll(Integer.toString(i)));
+		}
 		Exception e = Assertions.assertThrows(InvalidGameException.class, () -> {
-
-			int cursor = 23;
-			List<Roll> rolls = new ArrayList<>();
-			for (int i = 0; i < 25; i++) {
-				Roll roll = new Roll(Integer.toString(i));
-				rolls.add(roll);
-			}
-
 			gameValidator.validateGameMoreFrames(rolls, cursor);
 		});
 		assertEquals(MORE_FRAMES_MESSAGE, e.getMessage());
 	}
 
 	@Test
-	public void testValidateGameLessFrames_failRollsBelow() {
+	void testValidateGameLessFrames_failRollsBelow() {
+		List<Roll> rolls = new ArrayList<>();
+		int cursor = 25;
+		int position = 8;
+		for (int i = 0; i < 25; i++) {
+			rolls.add(new Roll(Integer.toString(i)));
+		}
 		Exception e = Assertions.assertThrows(InvalidGameException.class, () -> {
-
-			int cursor = 25;
-			int position = 8;
-			List<Roll> rolls = new ArrayList<>();
-			for (int i = 0; i < 25; i++) {
-				Roll roll = new Roll(Integer.toString(i));
-				rolls.add(roll);
-			}
-
 			gameValidator.validateGameLessFrames(rolls, cursor, position);
 		});
 		assertEquals(LESS_FRAMES_MESSAGE, e.getMessage());

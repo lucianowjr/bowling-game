@@ -14,6 +14,8 @@ import com.luciano.bowlinggame.model.Roll;
 
 class OutputServiceImplTest {
 
+	private static String HEADER = "\nFrame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10\n";
+
 	private OutputService outputService;
 
 	@BeforeEach
@@ -22,7 +24,7 @@ class OutputServiceImplTest {
 	}
 
 	@Test
-	public void testGetScoreboard_SampleScoreboard() {
+	void testGetScoreboard_SampleScoreboard() {
 		List<Player> players = new ArrayList<>();
 		players.add(createSamplePlayer());
 		String scoreboard = outputService.getScoreBoard(players);
@@ -31,7 +33,7 @@ class OutputServiceImplTest {
 	}
 
 	@Test
-	public void testGetScoreboard_PerfecScoreboard() {
+	void testGetScoreboard_PerfecScoreboard() {
 		List<Player> players = new ArrayList<>();
 		players.add(createPerfectPlayer());
 		String scoreboard = outputService.getScoreBoard(players);
@@ -40,7 +42,7 @@ class OutputServiceImplTest {
 	}
 
 	@Test
-	public void testGetScoreboard_ZeroScoreboard() {
+	void testGetScoreboard_ZeroScoreboard() {
 		List<Player> players = new ArrayList<>();
 		players.add(createZeroPlayer());
 		String scoreboard = outputService.getScoreBoard(players);
@@ -49,7 +51,7 @@ class OutputServiceImplTest {
 	}
 
 	@Test
-	public void testGetScoreboard_SpareLastFrameScoreboard() {
+	void testGetScoreboard_SpareLastFrameScoreboard() {
 		List<Player> players = new ArrayList<>();
 		players.add(createSpareLastFramePlayer());
 		String scoreboard = outputService.getScoreBoard(players);
@@ -225,7 +227,7 @@ class OutputServiceImplTest {
 
 	private String generateSampleScoreBoard() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("\n\nFrame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10\n");
+		sb.append(HEADER);
 		sb.append("Jeff\n");
 		sb.append("Pinfalls");
 		sb.append("\t\tX");
@@ -245,7 +247,7 @@ class OutputServiceImplTest {
 
 	private String generatePerfectScoreBoard() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("\n\nFrame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10\n");
+		sb.append(HEADER);
 		sb.append("Frank\n");
 		sb.append("Pinfalls");
 		for (int i = 0; i < 9; i++) {
@@ -261,7 +263,7 @@ class OutputServiceImplTest {
 
 	private String generateZeroScoreBoard() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("\n\nFrame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10\n");
+		sb.append(HEADER);
 		sb.append("Carl\n");
 		sb.append("Pinfalls");
 		for (int i = 0; i < 10; i++) {
@@ -276,7 +278,7 @@ class OutputServiceImplTest {
 
 	private String generateSpareLastFrameScoreBoard() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("\n\nFrame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10\n");
+		sb.append(HEADER);
 		sb.append("Carl\n");
 		sb.append("Pinfalls");
 		for (int i = 0; i < 9; i++) {

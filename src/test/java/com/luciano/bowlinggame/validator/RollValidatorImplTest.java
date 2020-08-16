@@ -19,7 +19,7 @@ class RollValidatorImplTest {
 	}
 
 	@Test
-	public void testValidateRollValue_failValueIsBelow() {
+	void testValidateRollValue_failValueIsBelow() {
 		Assertions.assertThrows(InvalidValueException.class, () -> {
 			rollValidator.validateRoll("-5");
 		});
@@ -27,21 +27,21 @@ class RollValidatorImplTest {
 	}
 
 	@Test
-	public void testValidateRollValue_failValueIsOver() {
+	void testValidateRollValue_failValueIsOver() {
 		Assertions.assertThrows(InvalidValueException.class, () -> {
 			rollValidator.validateRoll("15");
 		});
 	}
 
 	@Test
-	public void testValidateRollValue_failWhenValueIsInvalid() {
+	void testValidateRollValue_failWhenValueIsInvalid() {
 		Assertions.assertThrows(InvalidDataException.class, () -> {
 			rollValidator.validateRoll("G");
 		});
 	}
 
 	@Test
-	public void testValidateRollValue_ValidValues() {
+	void testValidateRollValue_ValidValues() {
 		for (int i = 0; i <= 10; i++) {
 			String num = Integer.toString(i);
 			assertEquals(num, rollValidator.validateRoll(num));
