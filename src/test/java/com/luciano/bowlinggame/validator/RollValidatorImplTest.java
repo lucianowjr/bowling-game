@@ -1,6 +1,7 @@
 package com.luciano.bowlinggame.validator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,24 +21,26 @@ class RollValidatorImplTest {
 
 	@Test
 	void testValidateRollValue_failValueIsBelow() {
-		Assertions.assertThrows(InvalidValueException.class, () -> {
+		InvalidValueException thrown = Assertions.assertThrows(InvalidValueException.class, () -> {
 			rollValidator.validateRoll("-5");
 		});
-
+		assertTrue(thrown.getMessage().contains("outside the range 0 to 10"));
 	}
 
 	@Test
 	void testValidateRollValue_failValueIsOver() {
-		Assertions.assertThrows(InvalidValueException.class, () -> {
+		InvalidValueException thrown = Assertions.assertThrows(InvalidValueException.class, () -> {
 			rollValidator.validateRoll("15");
 		});
+		assertTrue(thrown.getMessage().contains("outside the range 0 to 10"));
 	}
 
 	@Test
 	void testValidateRollValue_failWhenValueIsInvalid() {
-		Assertions.assertThrows(InvalidDataException.class, () -> {
+		InvalidDataException thrown = Assertions.assertThrows(InvalidDataException.class, () -> {
 			rollValidator.validateRoll("G");
 		});
+		assertTrue(thrown.getMessage().contains("is invalid"));
 	}
 
 	@Test

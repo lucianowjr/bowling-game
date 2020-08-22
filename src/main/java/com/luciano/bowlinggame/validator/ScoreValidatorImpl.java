@@ -8,7 +8,7 @@ import com.luciano.bowlinggame.exception.InvalidGameException;
 import com.luciano.bowlinggame.model.Roll;
 
 @Component
-public class GameValidatorImpl implements GameValidator {
+public class ScoreValidatorImpl implements ScoreValidator {
 
 	private static int MIN_ROLLS_GAME = 11;
 	private static int MAX_ROLLS_GAME = 21;

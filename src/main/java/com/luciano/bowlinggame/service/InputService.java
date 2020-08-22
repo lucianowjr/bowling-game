@@ -1,12 +1,17 @@
 package com.luciano.bowlinggame.service;
 
+import java.util.List;
+import java.util.Map;
+
+import com.luciano.bowlinggame.model.Roll;
+
 public interface InputService {
 
 	/**
-	 * Get the absolute file path from the console
+	 * Reads the input file and put the file data into a Map object
 	 * 
-	 * @return absolute path of the input file
+	 * @return A Map of players and their rolls
 	 */
-	String getInput();
+	Map<String, List<Roll>> readFile(String path);
 
 }

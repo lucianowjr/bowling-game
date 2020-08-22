@@ -1,12 +1,14 @@
 package com.luciano.bowlinggame.controller;
 
+import com.luciano.bowlinggame.model.FileData;
+
 public interface InputController {
 
 	/**
-	 * Get the absolute file path from the console
+	 * Gets the input file data
 	 * 
-	 * @return absolute path of the input file
+	 * @return The file data object
 	 */
-	String getInputFilePath();
+	FileData getFileData(String filePath);
 
 }

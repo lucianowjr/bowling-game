@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.luciano.bowlinggame.model.Frame;
 import com.luciano.bowlinggame.model.Player;
 import com.luciano.bowlinggame.model.Roll;
+import com.luciano.bowlinggame.model.Scoreboard;
 
 class OutputServiceImplTest {
 
@@ -27,36 +28,40 @@ class OutputServiceImplTest {
 	void testGetScoreboard_SampleScoreboard() {
 		List<Player> players = new ArrayList<>();
 		players.add(createSamplePlayer());
-		String scoreboard = outputService.getScoreBoard(players);
+		Scoreboard scoreboard = new Scoreboard(players);
+		String sb = outputService.getScoreboard(scoreboard);
 		String testScoreboard = generateSampleScoreBoard();
-		assertEquals(testScoreboard, scoreboard);
+		assertEquals(testScoreboard, sb);
 	}
 
 	@Test
 	void testGetScoreboard_PerfecScoreboard() {
 		List<Player> players = new ArrayList<>();
 		players.add(createPerfectPlayer());
-		String scoreboard = outputService.getScoreBoard(players);
+		Scoreboard scoreboard = new Scoreboard(players);
+		String sb = outputService.getScoreboard(scoreboard);
 		String testScoreboard = generatePerfectScoreBoard();
-		assertEquals(testScoreboard, scoreboard);
+		assertEquals(testScoreboard, sb);
 	}
 
 	@Test
 	void testGetScoreboard_ZeroScoreboard() {
 		List<Player> players = new ArrayList<>();
 		players.add(createZeroPlayer());
-		String scoreboard = outputService.getScoreBoard(players);
+		Scoreboard scoreboard = new Scoreboard(players);
+		String sb = outputService.getScoreboard(scoreboard);
 		String testScoreboard = generateZeroScoreBoard();
-		assertEquals(testScoreboard, scoreboard);
+		assertEquals(testScoreboard, sb);
 	}
 
 	@Test
 	void testGetScoreboard_SpareLastFrameScoreboard() {
 		List<Player> players = new ArrayList<>();
 		players.add(createSpareLastFramePlayer());
-		String scoreboard = outputService.getScoreBoard(players);
+		Scoreboard scoreboard = new Scoreboard(players);
+		String sb = outputService.getScoreboard(scoreboard);
 		String testScoreboard = generateSpareLastFrameScoreBoard();
-		assertEquals(testScoreboard, scoreboard);
+		assertEquals(testScoreboard, sb);
 	}
 
 	private Player createSamplePlayer() {

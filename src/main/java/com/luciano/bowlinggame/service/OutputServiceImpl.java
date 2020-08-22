@@ -1,11 +1,10 @@
 package com.luciano.bowlinggame.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.luciano.bowlinggame.model.Frame;
 import com.luciano.bowlinggame.model.Player;
+import com.luciano.bowlinggame.model.Scoreboard;
 
 @Service
 public class OutputServiceImpl implements OutputService {
@@ -22,29 +21,29 @@ public class OutputServiceImpl implements OutputService {
 	private int score = 0;
 
 	@Override
-	public String getScoreBoard(List<Player> players) {
-		StringBuilder scoreboard = new StringBuilder();
+	public String getScoreboard(Scoreboard scoreboard) {
+		StringBuilder sb = new StringBuilder();
 
-		scoreboard.append(HEADER);
+		sb.append(HEADER);
 
-		players.stream().forEach(player -> {
-			scoreboard.append(player.getName() + "\n");
-			scoreboard.append("Pinfalls");
+		scoreboard.getPlayers().stream().forEach(player -> {
+			sb.append(player.getName() + "\n");
+			sb.append("Pinfalls");
 
 			player.getFrames().stream().forEach(frame -> {
 				if (frame.isStrike()) {
-					scoreboard.append(getStrikeFrame(frame));
+					sb.append(getStrikeFrame(frame));
 				} else if (frame.isSpare()) {
-					scoreboard.append(getSpareFrame(frame));
+					sb.append(getSpareFrame(frame));
 				} else {
-					scoreboard.append(getSimpleFrame(frame));
+					sb.append(getSimpleFrame(frame));
 				}
 			});
 
-			scoreboard.append(getScore(player));
+			sb.append(getScore(player));
 		});
 
-		return scoreboard.toString();
+		return sb.toString();
 	}
 
 	private String getSimpleFrame(Frame frame) {

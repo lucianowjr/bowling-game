@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.luciano.bowlinggame.model.Roll;
 
-public interface GameValidator {
+public interface ScoreValidator {
 
 	/**
 	 * Validate the list of rolls of a game

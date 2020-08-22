@@ -12,16 +12,16 @@ import org.junit.jupiter.api.Test;
 import com.luciano.bowlinggame.exception.InvalidGameException;
 import com.luciano.bowlinggame.model.Roll;
 
-class GameValidatorImplTest {
+class ScoreValidatorImplTest {
 
-	private GameValidator gameValidator;
+	private ScoreValidator gameValidator;
 
 	private static String LESS_FRAMES_MESSAGE = "There were less than 10 frames in a player game. Please, check the input file.";
 	private static String MORE_FRAMES_MESSAGE = "There were more than 10 frames in a player game. Please, check the input file.";
 
 	@BeforeEach
 	public void setUp() {
-		gameValidator = new GameValidatorImpl();
+		gameValidator = new ScoreValidatorImpl();
 	}
 
 	@Test

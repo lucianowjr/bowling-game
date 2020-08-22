@@ -1,17 +1,15 @@
 package com.luciano.bowlinggame.service;
 
-import java.util.List;
-
-import com.luciano.bowlinggame.model.Player;
+import com.luciano.bowlinggame.model.Scoreboard;
 
 public interface OutputService {
 
 	/**
-	 * Returns the final game scoreboard
+	 * Returns the final game scoreboard text
 	 *
-	 * @param list of players and their score frames
-	 * @return game scoreboard
+	 * @param the scoreboard object
+	 * @return the game scoreboard text
 	 */
-	String getScoreBoard(List<Player> players);
+	String getScoreboard(Scoreboard scoreboard);
 
 }

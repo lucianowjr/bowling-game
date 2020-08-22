@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -13,10 +12,13 @@ import org.junit.jupiter.api.Test;
 
 import com.luciano.bowlinggame.controller.GameController;
 import com.luciano.bowlinggame.controller.GameControllerImpl;
+import com.luciano.bowlinggame.controller.InputController;
+import com.luciano.bowlinggame.controller.InputControllerImpl;
 import com.luciano.bowlinggame.controller.OutputController;
 import com.luciano.bowlinggame.controller.OutputControllerImpl;
 import com.luciano.bowlinggame.exception.FileParsingException;
-import com.luciano.bowlinggame.model.Player;
+import com.luciano.bowlinggame.model.FileData;
+import com.luciano.bowlinggame.model.Scoreboard;
 
 class BowlingGameApplicationTests {
 
@@ -32,40 +34,46 @@ class BowlingGameApplicationTests {
 
 	private GameController gameController;
 
+	private InputController inputController;
+
 	@BeforeEach
 	public void setUpStreams() {
 		outputController = new OutputControllerImpl();
 		gameController = new GameControllerImpl();
+		inputController = new InputControllerImpl();
 	}
 
 	@Test
 	void integrationTest_SampleCase() throws IOException {
 
-		List<Player> players = gameController.getPlayersScores(SAMPLE_FILE);
-		String scoreboard = outputController.getScoreBoard(players);
+		FileData fileData = inputController.getFileData(SAMPLE_FILE);
+		Scoreboard scoreboard = gameController.getScoreboard(fileData);
+		String sb = outputController.getScoreboard(scoreboard);
 
 		String fileContent = readFileAsString(SAMPLE_OUTPUT_FILE);
-		assertEquals(fileContent, scoreboard);
+		assertEquals(fileContent, sb);
 	}
 
 	@Test
 	void integrationTest_PerfectCase() throws IOException {
 
-		List<Player> players = gameController.getPlayersScores(PERFECT_FILE);
-		String scoreboard = outputController.getScoreBoard(players);
+		FileData fileData = inputController.getFileData(PERFECT_FILE);
+		Scoreboard scoreboard = gameController.getScoreboard(fileData);
+		String sb = outputController.getScoreboard(scoreboard);
 
 		String fileContent = readFileAsString(PERFECT_OUTPUT_FILE);
-		assertEquals(fileContent, scoreboard);
+		assertEquals(fileContent, sb);
 	}
 
 	@Test
 	void integrationTest_ZeroCase() throws IOException {
 
-		List<Player> players = gameController.getPlayersScores(ZERO_FILE);
-		String scoreboard = outputController.getScoreBoard(players);
+		FileData fileData = inputController.getFileData(ZERO_FILE);
+		Scoreboard scoreboard = gameController.getScoreboard(fileData);
+		String sb = outputController.getScoreboard(scoreboard);
 
 		String fileContent = readFileAsString(ZERO_OUTPUT_FILE);
-		assertEquals(fileContent, scoreboard);
+		assertEquals(fileContent, sb);
 	}
 
 	private static String readFileAsString(String outputFile) throws IOException {

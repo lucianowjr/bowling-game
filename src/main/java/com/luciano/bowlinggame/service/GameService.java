@@ -1,19 +1,16 @@
 package com.luciano.bowlinggame.service;
 
-import java.util.List;
-import java.util.Map;
-
-import com.luciano.bowlinggame.model.Player;
-import com.luciano.bowlinggame.model.Roll;
+import com.luciano.bowlinggame.model.FileData;
+import com.luciano.bowlinggame.model.Scoreboard;
 
 public interface GameService {
 
 	/**
-	 * Returns a list of players and their lists of frames
+	 * Returns the game scoreboard
 	 *
-	 * @param map of players and their lists of rolls
-	 * @return list of players and their lists of frames
+	 * @param the file data object
+	 * @return the scoreboard object
 	 */
-	List<Player> createGame(Map<String, List<Roll>> rollsMap);
+	Scoreboard createScoreboard(FileData fileData);
 
 }

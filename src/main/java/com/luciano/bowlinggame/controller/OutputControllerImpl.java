@@ -1,11 +1,9 @@
 package com.luciano.bowlinggame.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.luciano.bowlinggame.model.Player;
+import com.luciano.bowlinggame.model.Scoreboard;
 import com.luciano.bowlinggame.service.OutputService;
 import com.luciano.bowlinggame.service.OutputServiceImpl;
 import com.luciano.bowlinggame.view.OutputView;
@@ -27,13 +25,13 @@ public class OutputControllerImpl implements OutputController {
 	}
 
 	@Override
-	public void printScoreBoard(List<Player> players) {
-		outputView.print(outputService.getScoreBoard(players));
+	public void printScoreboard(Scoreboard scoreboard) {
+		outputView.print(outputService.getScoreboard(scoreboard));
 	}
 
 	@Override
-	public String getScoreBoard(List<Player> players) {
-		return outputService.getScoreBoard(players);
+	public String getScoreboard(Scoreboard scoreboard) {
+		return outputService.getScoreboard(scoreboard);
 	}
 
 }

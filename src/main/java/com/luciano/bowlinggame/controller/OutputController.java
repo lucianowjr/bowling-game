@@ -1,24 +1,22 @@
 package com.luciano.bowlinggame.controller;
 
-import java.util.List;
-
-import com.luciano.bowlinggame.model.Player;
+import com.luciano.bowlinggame.model.Scoreboard;
 
 public interface OutputController {
 
 	/**
-	 * Print the final game scoreboard on the console
+	 * Prints the game scoreboard on the console
 	 *
-	 * @param absolute path of the input file
+	 * @param the scoreboard object
 	 */
-	void printScoreBoard(List<Player> players);
+	void printScoreboard(Scoreboard scoreboard);
 
 	/**
-	 * Returns the final game scoreboard
+	 * Returns the game scoreboard
 	 *
-	 * @param list of players and its frames
-	 * @return game scoreboard
+	 * @param the scoreboard object
+	 * @return the game scoreboard text
 	 */
-	String getScoreBoard(List<Player> players);
+	String getScoreboard(Scoreboard scoreboard);
 
 }

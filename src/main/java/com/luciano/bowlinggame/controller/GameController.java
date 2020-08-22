@@ -1,17 +1,16 @@
 package com.luciano.bowlinggame.controller;
 
-import java.util.List;
-
-import com.luciano.bowlinggame.model.Player;
+import com.luciano.bowlinggame.model.FileData;
+import com.luciano.bowlinggame.model.Scoreboard;
 
 public interface GameController {
 
 	/**
-	 * Returns a list of players and their lists of frames
+	 * Returns the scoreboard
 	 *
-	 * @param absolute path of the input file
-	 * @return list of players and their frames
+	 * @param The file data object
+	 * @return The scoreboard objetc
 	 */
-	List<Player> getPlayersScores(String filePath);
+	Scoreboard getScoreboard(FileData fileData);
 
 }
