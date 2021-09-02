@@ -42,7 +42,7 @@ $ mvn clean package
 ... or you can donwload the [source code zip file](https://github.com/lucianowjr/bowling-game/archive/master.zip). Then, unzip the source code, open a new command line window, navigate to the unzipped folder `bowling-game` and execute the maven command `mvn clean package`.
 
 ## Run
-Once the application has been compiled successfully, you can navigate on a command line window to the target folder `bowling-game/target` and run it by passing the input file path as argument of the folowing command: `java -jar bowling-game-0.0.1-SNAPSHOT.jar /file-folder/sample.txt`.
+Once the application has been compiled successfully, you can navigate on a command line window to the target folder `bowling-game/target` and run it by passing the input file path as argument of the following command: `java -jar bowling-game-0.0.1-SNAPSHOT.jar /file-folder/sample.txt`.
 
 ## Sample data files
 Sample data files are available to test the application in the test resources folder: `bowling-game/src/test/resources`.
